@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dagpfxnqtlxgi"]
+
+[ext_resource type="PackedScene" uid="uid://dke8vc5efp53r" path="res://Assets/Environment/Portal.glb" id="1_6gvgm"]
+[ext_resource type="Shader" uid="uid://deu2qd4tm0jtt" path="res://Materials/PortalShader.tres" id="2_siqyh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xttf8"]
+render_priority = 0
+shader = ExtResource("2_siqyh")
+
+[node name="PortalGeometry" instance=ExtResource("1_6gvgm")]
+
+[node name="Portal2" parent="." index="0"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_xttf8")

@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx2by673cvqw4"]
+
+[ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_ub2pc"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_ub2pc")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LifesBox" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+offset_left = 40.0
+offset_right = 175.0
+offset_bottom = 53.0
+
+[node name="Label" type="Label" parent="Control/LifesBox"]
+layout_mode = 2
+text = "Lifes: "
+
+[node name="Lifes" type="Label" parent="Control/LifesBox"]
+layout_mode = 2
+text = "0
+"
+
+[node name="ScoreBox" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -216.0
+offset_bottom = 53.0
+grow_horizontal = 0
+
+[node name="Multiplier" type="Label" parent="Control/ScoreBox"]
+layout_mode = 2
+text = "1
+"
+
+[node name="Label" type="Label" parent="Control/ScoreBox"]
+layout_mode = 2
+text = "X       Score: "
+
+[node name="Score" type="Label" parent="Control/ScoreBox"]
+layout_mode = 2
+text = "0000000
+"
+
+[node name="LevelBox" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -203.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Control/LevelBox"]
+layout_mode = 2
+text = "Level: "
+
+[node name="Level" type="Label" parent="Control/LevelBox"]
+layout_mode = 2
+text = "1"
+
+[node name="Label2" type="Label" parent="Control/LevelBox"]
+layout_mode = 2
+text = "Time: "
+
+[node name="Time" type="Label" parent="Control/LevelBox"]
+layout_mode = 2

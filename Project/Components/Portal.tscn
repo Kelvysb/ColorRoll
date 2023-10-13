@@ -1,0 +1,96 @@
+[gd_scene load_steps=18 format=3 uid="uid://b0wq1bqdq7awm"]
+
+[ext_resource type="Script" path="res://Scripts/Portal.gd" id="1_3qtme"]
+[ext_resource type="PackedScene" uid="uid://dagpfxnqtlxgi" path="res://Assets/Environment/portalGeometry.tscn" id="2_kra8d"]
+[ext_resource type="PackedScene" uid="uid://stfdbsg0ghgj" path="res://Assets/Environment/portalDiscGeometry.tscn" id="3_h6pq3"]
+[ext_resource type="Shader" path="res://Materials/PortalParticleShader.gdshader" id="4_hkqsk"]
+[ext_resource type="Shader" uid="uid://bib2tvsy16hgi" path="res://Materials/PortalDiscShader.tres" id="4_ncb48"]
+
+[sub_resource type="Gradient" id="Gradient_vitr1"]
+colors = PackedColorArray(0.233925, 0.233925, 0.233925, 1, 0.796243, 0.796243, 0.796243, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qi5kr"]
+noise_type = 2
+frequency = 0.001
+cellular_jitter = 0.1
+cellular_return_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jys5c"]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_vitr1")
+noise = SubResource("FastNoiseLite_qi5kr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2ol2"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_ncb48")
+shader_parameter/Noise = SubResource("NoiseTexture2D_jys5c")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4ubcp"]
+size = Vector3(69.6479, 59.8866, 2.31311)
+
+[sub_resource type="Gradient" id="Gradient_iw4dx"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qd0le"]
+gradient = SubResource("Gradient_iw4dx")
+
+[sub_resource type="Curve" id="Curve_h2n7r"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.279221, 0.526316), 0.0, 0.0, 0, 0, Vector2(0.532468, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5h32r"]
+curve = SubResource("Curve_h2n7r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_om3np"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 0.0
+gravity = Vector3(0, 0, 50)
+scale_curve = SubResource("CurveTexture_5h32r")
+color_ramp = SubResource("GradientTexture1D_qd0le")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwhwf"]
+render_priority = 0
+shader = ExtResource("4_hkqsk")
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/emission_energy = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_436tt"]
+material = SubResource("ShaderMaterial_wwhwf")
+
+[node name="Portal" type="Node3D" groups=["portal"]]
+script = ExtResource("1_3qtme")
+
+[node name="PortalGeometry" parent="." instance=ExtResource("2_kra8d")]
+
+[node name="Circle" parent="." instance=ExtResource("3_h6pq3")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 1, 0.35347, -1.90735e-06, 0.0139008)
+cast_shadow = 0
+surface_material_override/0 = SubResource("ShaderMaterial_e2ol2")
+
+[node name="PortalContactArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalContactArea"]
+shape = SubResource("BoxShape3D_4ubcp")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 100
+lifetime = 5.0
+visibility_aabb = AABB(-38.2717, -33.8893, -91.094, 76.5433, 67.7787, 182.188)
+process_material = SubResource("ParticleProcessMaterial_om3np")
+draw_pass_1 = SubResource("SphereMesh_436tt")
+
+[connection signal="area_entered" from="PortalContactArea" to="." method="_on_portal_contact_area_area_entered"]

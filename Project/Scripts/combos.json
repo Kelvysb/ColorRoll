@@ -1,0 +1,29 @@
+{
+	"Combos": [
+		{
+			"Count":0,
+			"Multiplier":1,
+			"Life": 0
+		},
+		{
+			"Count":2,
+			"Multiplier":2,
+			"Life": 1
+		},
+		{
+			"Count":4,
+			"Multiplier":3,
+			"Life": 1
+		},
+		{
+			"Count":6,
+			"Multiplier":4,
+			"Life": 1
+		},
+		{
+			"Count":8,
+			"Multiplier":5,
+			"Life": 1
+		}		
+	]
+}

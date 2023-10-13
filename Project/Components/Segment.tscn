@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbyx7ddy2c1n7"]
+
+[ext_resource type="PackedScene" uid="uid://dksm50ahupbci" path="res://Assets/Environment/tunelGeometry.tscn" id="1_hfe0x"]
+[ext_resource type="Script" path="res://Scripts/Segment.gd" id="1_lhxi6"]
+[ext_resource type="PackedScene" uid="uid://b0wq1bqdq7awm" path="res://Components/Portal.tscn" id="3_kqy6g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p8hdx"]
+size = Vector3(68.9846, 48.4054, 4.3003)
+
+[node name="Segment" type="Node3D"]
+script = ExtResource("1_lhxi6")
+
+[node name="Tunel" parent="." instance=ExtResource("1_hfe0x")]
+
+[node name="Portal" parent="." instance=ExtResource("3_kqy6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -91.9468)
+
+[node name="NextPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100.5)
+
+[node name="ExitArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -102.945)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExitArea"]
+shape = SubResource("BoxShape3D_p8hdx")
+
+[connection signal="area_entered" from="ExitArea" to="." method="_on_exit_area_area_entered"]

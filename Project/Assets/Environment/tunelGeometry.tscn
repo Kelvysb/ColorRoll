@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dksm50ahupbci"]
+
+[ext_resource type="PackedScene" uid="uid://c2i2kifiw1x1q" path="res://Assets/Environment/Tunel.glb" id="1_tixmk"]
+[ext_resource type="Shader" uid="uid://dwisrl3r6l5m7" path="res://Materials/tunelShader.tres" id="2_nmi16"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_misb2"]
+render_priority = 0
+shader = ExtResource("2_nmi16")
+
+[node name="Tunel" instance=ExtResource("1_tixmk")]
+
+[node name="Tunnel" parent="." index="0"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_misb2")

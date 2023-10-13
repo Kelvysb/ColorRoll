@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://bnfbsh47xy1tw"]
+
+[ext_resource type="Script" path="res://Scripts/HitEffect.gd" id="1_pqm0d"]
+[ext_resource type="Shader" uid="uid://bgafp230esi7c" path="res://Materials/HitEffectShader.tres" id="2_f74wh"]
+
+[sub_resource type="Gradient" id="Gradient_fvvuw"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.431373, 0.109804, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mypl1"]
+gradient = SubResource("Gradient_fvvuw")
+
+[sub_resource type="Gradient" id="Gradient_mbgu5"]
+offsets = PackedFloat32Array(0, 0.479675, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.478431, 0, 1, 1, 0.478431, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_18poi"]
+gradient = SubResource("Gradient_mbgu5")
+
+[sub_resource type="Curve" id="Curve_qutdw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_la3qk"]
+curve = SubResource("Curve_qutdw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o5axq"]
+lifetime_randomness = 0.3
+particle_flag_align_y = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, -8, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_la3qk")
+color_ramp = SubResource("GradientTexture1D_18poi")
+color_initial_ramp = SubResource("GradientTexture1D_mypl1")
+turbulence_enabled = true
+turbulence_noise_scale = 1.0
+turbulence_influence_min = 0.04
+turbulence_influence_max = 0.22
+
+[sub_resource type="Curve" id="Curve_vj458"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.517241, 0.536842), 0.0, 0.0, 0, 0, Vector2(1, 0.0105263), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nj1yt"]
+render_priority = 0
+shader = ExtResource("2_f74wh")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/emission = Color(1, 0, 0, 1)
+shader_parameter/emission_energy = 5.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_8ojeh"]
+material = SubResource("ShaderMaterial_nj1yt")
+radius = 0.1
+section_length = 0.1
+cap_top = false
+cap_bottom = false
+curve = SubResource("Curve_vj458")
+
+[node name="HitEffect" type="Node3D"]
+script = ExtResource("1_pqm0d")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000184059, 0.0300357, -0.00309741)
+emitting = false
+amount = 1000
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-19, -13, -11, 38, 26, 22)
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_o5axq")
+draw_pass_1 = SubResource("TubeTrailMesh_8ojeh")

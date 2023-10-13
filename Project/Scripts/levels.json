@@ -1,0 +1,34 @@
+{
+	"Levels":[
+		{
+			"Level":1,
+			"Speed": 30.0,
+			"Frequency": 2,
+			"TriggerTime" : 0
+		},
+		{
+			"Level":2,
+			"Speed": 40.0,
+			"Frequency": 2,
+			"TriggerTime" : 30
+		},
+		{
+			"Level":3,
+			"Speed": 50.0,
+			"Frequency": 2,
+			"TriggerTime" : 60
+		},
+		{
+			"Level":4,
+			"Speed": 60.0,
+			"Frequency": 1,
+			"TriggerTime" : 90
+		},
+		{
+			"Level":5,
+			"Speed": 70.0,
+			"Frequency": 1,
+			"TriggerTime" : 120
+		}
+	]
+}
