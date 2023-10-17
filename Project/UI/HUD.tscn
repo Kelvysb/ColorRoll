@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bx2by673cvqw4"]
+[gd_scene load_steps=8 format=3 uid="uid://bx2by673cvqw4"]
 
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_ub2pc"]
+[ext_resource type="Texture2D" uid="uid://u52h7vp6pt7o" path="res://Assets/GUI/LifeBarBack.png" id="2_6sv8j"]
+[ext_resource type="Texture2D" uid="uid://ddmskeda53s01" path="res://Assets/GUI/LifeBlock.png" id="3_il5st"]
+[ext_resource type="Texture2D" uid="uid://cc6a1a1y5n8yh" path="res://Assets/GUI/ScoreBarBack.png" id="4_3dj6e"]
+[ext_resource type="Theme" uid="uid://8aaigwn277tm" path="res://Assets/GUI/FontTheme.tres" id="5_8wbnb"]
+[ext_resource type="Theme" uid="uid://c4pl6jflxssoh" path="res://Assets/GUI/FontThemeMedium.tres" id="6_fqq71"]
+[ext_resource type="Texture2D" uid="uid://doa6sux2x36pc" path="res://Assets/GUI/TimeBarBack.png" id="7_jdfi1"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ub2pc")
@@ -13,67 +19,182 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LifesBox" type="HBoxContainer" parent="Control"]
+[node name="LifeBarContainer" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = 15.0
+offset_top = 7.0
+offset_right = 280.0
+offset_bottom = 59.0
+
+[node name="Back" type="TextureRect" parent="Control/LifeBarContainer"]
+modulate = Color(1, 1, 1, 0.827451)
+layout_mode = 0
+offset_right = 278.0
+offset_bottom = 70.0
+texture = ExtResource("2_6sv8j")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LifesBox" type="HBoxContainer" parent="Control/LifeBarContainer"]
 layout_mode = 1
-offset_left = 40.0
-offset_right = 175.0
-offset_bottom = 53.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = 0.5
+offset_right = 118.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="Control/LifesBox"]
+[node name="Life1" type="TextureRect" parent="Control/LifeBarContainer/LifesBox"]
+modulate = Color(1, 1, 1, 0.886275)
 layout_mode = 2
-text = "Lifes: "
+texture = ExtResource("3_il5st")
+expand_mode = 3
+stretch_mode = 4
 
-[node name="Lifes" type="Label" parent="Control/LifesBox"]
+[node name="Life2" type="TextureRect" parent="Control/LifeBarContainer/LifesBox"]
+modulate = Color(1, 1, 1, 0.886275)
 layout_mode = 2
-text = "0
-"
+texture = ExtResource("3_il5st")
+expand_mode = 3
+stretch_mode = 4
 
-[node name="ScoreBox" type="HBoxContainer" parent="Control"]
+[node name="Life3" type="TextureRect" parent="Control/LifeBarContainer/LifesBox"]
+modulate = Color(1, 1, 1, 0.886275)
+layout_mode = 2
+texture = ExtResource("3_il5st")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Life4" type="TextureRect" parent="Control/LifeBarContainer/LifesBox"]
+modulate = Color(1, 1, 1, 0.886275)
+layout_mode = 2
+texture = ExtResource("3_il5st")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Life5" type="TextureRect" parent="Control/LifeBarContainer/LifesBox"]
+modulate = Color(1, 1, 1, 0.886275)
+layout_mode = 2
+texture = ExtResource("3_il5st")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="ScoreContainer" type="Control" parent="Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -216.0
-offset_bottom = 53.0
+offset_left = -251.0
+offset_top = 12.0
+offset_bottom = 95.0
 grow_horizontal = 0
 
-[node name="Multiplier" type="Label" parent="Control/ScoreBox"]
+[node name="TextureRect" type="TextureRect" parent="Control/ScoreContainer"]
+modulate = Color(1, 1, 1, 0.858824)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_3dj6e")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Control/ScoreContainer"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 57.0
+offset_right = 67.0
+offset_bottom = 84.0
+theme = ExtResource("5_8wbnb")
+text = "X"
+
+[node name="Label2" type="Label" parent="Control/ScoreContainer"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 5.0
+offset_right = 114.0
+offset_bottom = 39.0
+theme = ExtResource("5_8wbnb")
+theme_override_font_sizes/font_size = 16
+text = "SCORE"
+
+[node name="Multiplier" type="Label" parent="Control/ScoreContainer"]
 layout_mode = 2
+offset_left = 31.0
+offset_top = 20.0
+offset_right = 49.0
+offset_bottom = 58.0
+theme = ExtResource("6_fqq71")
 text = "1
 "
 
-[node name="Label" type="Label" parent="Control/ScoreBox"]
+[node name="Score" type="Label" parent="Control/ScoreContainer"]
 layout_mode = 2
-text = "X       Score: "
+offset_left = 82.0
+offset_top = 20.0
+offset_right = 208.0
+offset_bottom = 68.0
+theme = ExtResource("6_fqq71")
+text = "0"
 
-[node name="Score" type="Label" parent="Control/ScoreBox"]
-layout_mode = 2
-text = "0000000
-"
-
-[node name="LevelBox" type="HBoxContainer" parent="Control"]
+[node name="TimerContainer" type="Control" parent="Control"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -203.0
-offset_top = -40.0
+offset_left = -308.0
+offset_top = -58.0
+offset_right = -12.0
+offset_bottom = -7.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="Control/LevelBox"]
-layout_mode = 2
-text = "Level: "
+[node name="TextureRect" type="TextureRect" parent="Control/TimerContainer"]
+modulate = Color(1, 1, 1, 0.670588)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 79.0
+offset_top = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_jdfi1")
+expand_mode = 2
+stretch_mode = 4
 
-[node name="Level" type="Label" parent="Control/LevelBox"]
+[node name="Label" type="Label" parent="Control/TimerContainer"]
 layout_mode = 2
+offset_left = 82.0
+offset_top = 3.0
+offset_right = 150.0
+offset_bottom = 37.0
+theme = ExtResource("5_8wbnb")
+text = "Level"
+
+[node name="Level" type="Label" parent="Control/TimerContainer"]
+layout_mode = 2
+offset_left = 148.0
+offset_top = -3.0
+offset_right = 166.0
+offset_bottom = 45.0
+theme = ExtResource("6_fqq71")
 text = "1"
 
-[node name="Label2" type="Label" parent="Control/LevelBox"]
+[node name="Time" type="Label" parent="Control/TimerContainer"]
 layout_mode = 2
-text = "Time: "
-
-[node name="Time" type="Label" parent="Control/LevelBox"]
-layout_mode = 2
+offset_left = 224.0
+offset_top = -3.0
+offset_right = 278.0
+offset_bottom = 45.0
+theme = ExtResource("6_fqq71")
+text = "000"

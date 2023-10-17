@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://fex84b4n5131"]
+
+[ext_resource type="FontFile" uid="uid://15xd3064ce8v" path="res://Assets/Fonts/Mendung-3zKqz.ttf" id="1_4h2o6"]
+
+[resource]
+Button/colors/font_color = Color(0.8, 0.8, 0.8, 1)
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_4h2o6")

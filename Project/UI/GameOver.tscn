@@ -1,0 +1,123 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhspmsstb08y2"]
+
+[ext_resource type="Script" path="res://Scripts/GameOver.gd" id="1_ndxvg"]
+[ext_resource type="Theme" uid="uid://fex84b4n5131" path="res://Assets/GUI/MenuTheme.tres" id="3_6gc8q"]
+[ext_resource type="Theme" uid="uid://bvdamx30qin7c" path="res://Assets/GUI/TitleTheme.tres" id="4_rv4t5"]
+[ext_resource type="AudioStream" uid="uid://dlxj5n2e3if3g" path="res://Assets/Audio/click1.ogg" id="5_ha0ph"]
+
+[node name="GameOver" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_ndxvg")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32549, 0.32549, 0.32549, 0.745098)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -224.0
+offset_top = -144.0
+offset_right = -12.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Restart" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../Quit")
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Quit")
+theme = ExtResource("3_6gc8q")
+text = "Restart"
+
+[node name="Quit" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Restart")
+focus_neighbor_bottom = NodePath("../Restart")
+focus_next = NodePath("../Restart")
+focus_previous = NodePath("../Restart")
+theme = ExtResource("3_6gc8q")
+text = "Quit"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -65.5
+offset_right = 198.0
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_rv4t5")
+text = "Game Over"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -223.0
+offset_top = 65.0
+offset_right = 224.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rv4t5")
+theme_override_font_sizes/font_size = 60
+text = "Time: "
+
+[node name="Time" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rv4t5")
+theme_override_font_sizes/font_size = 60
+text = "0
+"
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rv4t5")
+theme_override_font_sizes/font_size = 60
+text = "   Score:
+"
+
+[node name="Score" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rv4t5")
+theme_override_font_sizes/font_size = 60
+text = "0
+"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ha0ph")
+
+[connection signal="focus_entered" from="Control/VBoxContainer/Restart" to="." method="PlayClick"]
+[connection signal="pressed" from="Control/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="focus_entered" from="Control/VBoxContainer/Quit" to="." method="PlayClick"]
+[connection signal="pressed" from="Control/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

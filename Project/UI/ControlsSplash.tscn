@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=3 uid="uid://vbxcgfcjgxq7"]
+
+[ext_resource type="Script" path="res://Scripts/ControlsSplash.gd" id="1_64phs"]
+[ext_resource type="PackedScene" uid="uid://cl6ie12skhyyy" path="res://Components/SegmentController.tscn" id="2_mnswq"]
+[ext_resource type="PackedScene" uid="uid://3i3h71ansqtx" path="res://UI/ControlsUi.tscn" id="3_slsgp"]
+[ext_resource type="Theme" uid="uid://bvdamx30qin7c" path="res://Assets/GUI/TitleTheme.tres" id="4_64vxu"]
+[ext_resource type="Theme" uid="uid://fex84b4n5131" path="res://Assets/GUI/MenuTheme.tres" id="5_vo1fx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7i32q"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_f386n"]
+sky_material = SubResource("ProceduralSkyMaterial_7i32q")
+
+[sub_resource type="Environment" id="Environment_kbtou"]
+background_mode = 2
+sky = SubResource("Sky_f386n")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_anisotropy = -0.62
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3poxq"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 1.51
+
+[node name="ControlsSplash" type="Node3D"]
+script = ExtResource("1_64phs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kbtou")
+camera_attributes = SubResource("CameraAttributesPractical_3poxq")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27.1191)
+
+[node name="SegmentController" parent="." instance=ExtResource("2_mnswq")]
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Menu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Menu/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0784314, 0.0784314, 0.0784314, 0.117647)
+
+[node name="Controls" parent="Menu/Control" instance=ExtResource("3_slsgp")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -468.5
+offset_top = -257.0
+offset_right = 468.5
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -262.0
+offset_top = -87.0
+offset_right = -38.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Start" type="Button" parent="Menu/Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_vo1fx")
+text = "Start"
+
+[node name="TimeLabel" type="Label" parent="Menu/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -295.0
+offset_top = -91.0
+offset_right = -268.0
+offset_bottom = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("4_64vxu")
+theme_override_font_sizes/font_size = 55
+text = "0"
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="pressed" from="Menu/Control/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

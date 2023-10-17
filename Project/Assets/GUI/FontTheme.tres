@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://8aaigwn277tm"]
+
+[ext_resource type="FontFile" uid="uid://15xd3064ce8v" path="res://Assets/Fonts/Mendung-3zKqz.ttf" id="1_wvu24"]
+
+[resource]
+Label/colors/font_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+Label/font_sizes/font_size = 22
+Label/fonts/font = ExtResource("1_wvu24")
+RichTextLabel/colors/default_color = Color(0.145098, 0.145098, 0.145098, 1)
+RichTextLabel/font_sizes/normal_font_size = 22

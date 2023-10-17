@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://3i3h71ansqtx"]
+
+[ext_resource type="Texture2D" uid="uid://dihsptfjeg7p7" path="res://Assets/GUI/Controls.png" id="1_lhkje"]
+[ext_resource type="Theme" uid="uid://8aaigwn277tm" path="res://Assets/GUI/FontTheme.tres" id="2_bdvqb"]
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 937.0
+offset_bottom = 514.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 29.0
+offset_top = 31.0
+offset_right = 943.0
+offset_bottom = 495.0
+texture = ExtResource("1_lhkje")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 74.0
+offset_right = 898.0
+offset_bottom = 464.0
+theme = ExtResource("2_bdvqb")
+text = "Controls:
+
+Open Dials:
+Dial left / Right / Up / Down = Rotate Cube
+A or + = Pause game / Accept
+B or - = Back
+D-Pad = Menu Navigation
+
+Keyboard:
+Arrows = Rotate Cube
+Enter or space = Pause Game / Accept
+Esc  = Back
+
+
+
+
+"
+scroll_active = false
+custom_effects = [null]

@@ -1,0 +1,137 @@
+[gd_scene load_steps=12 format=3 uid="uid://cs864wb5hrqgg"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_8g2bh"]
+[ext_resource type="PackedScene" uid="uid://cl6ie12skhyyy" path="res://Components/SegmentController.tscn" id="1_fg8a1"]
+[ext_resource type="Texture2D" uid="uid://cgvl4oj1ff8ff" path="res://Assets/GUI/icon.svg" id="3_c3eue"]
+[ext_resource type="Theme" uid="uid://bvdamx30qin7c" path="res://Assets/GUI/TitleTheme.tres" id="4_3bi7f"]
+[ext_resource type="Theme" uid="uid://fex84b4n5131" path="res://Assets/GUI/MenuTheme.tres" id="5_0u71h"]
+[ext_resource type="AudioStream" uid="uid://dlxj5n2e3if3g" path="res://Assets/Audio/click1.ogg" id="6_8gq0k"]
+[ext_resource type="AudioStream" uid="uid://3euroo31y02t" path="res://Assets/Audio/music.mp3" id="7_nwtt5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7i32q"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_f386n"]
+sky_material = SubResource("ProceduralSkyMaterial_7i32q")
+
+[sub_resource type="Environment" id="Environment_kbtou"]
+background_mode = 2
+sky = SubResource("Sky_f386n")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_anisotropy = -0.62
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3poxq"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 1.51
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_8g2bh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kbtou")
+camera_attributes = SubResource("CameraAttributesPractical_3poxq")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27.1191)
+
+[node name="SegmentController" parent="." instance=ExtResource("1_fg8a1")]
+
+[node name="MainMenuUI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="MainMenuUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MainMenuUI/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0784314, 0.0784314, 0.0784314, 0.117647)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenuUI/Control"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 34.0
+offset_right = 826.0
+offset_bottom = 314.0
+
+[node name="TextureRect" type="TextureRect" parent="MainMenuUI/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_c3eue")
+stretch_mode = 4
+
+[node name="Title" type="Label" parent="MainMenuUI/Control/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_3bi7f")
+text = "Color Roll"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuUI/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -30.0
+offset_right = 173.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="MainMenuUI/Control/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Exit")
+focus_next = NodePath("../About")
+focus_previous = NodePath("../Exit")
+theme = ExtResource("5_0u71h")
+text = "Start"
+
+[node name="About" type="Button" parent="MainMenuUI/Control/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Start")
+focus_neighbor_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../Start")
+theme = ExtResource("5_0u71h")
+text = "About
+"
+
+[node name="Exit" type="Button" parent="MainMenuUI/Control/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../About")
+focus_neighbor_bottom = NodePath("../Start")
+focus_next = NodePath("../Start")
+focus_previous = NodePath("../About")
+theme = ExtResource("5_0u71h")
+text = "Exit"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_8gq0k")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_nwtt5")
+volume_db = -35.0
+pitch_scale = 0.75
+autoplay = true
+
+[connection signal="focus_entered" from="MainMenuUI/Control/VBoxContainer/Start" to="." method="PlayClick"]
+[connection signal="pressed" from="MainMenuUI/Control/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="focus_entered" from="MainMenuUI/Control/VBoxContainer/About" to="." method="PlayClick"]
+[connection signal="pressed" from="MainMenuUI/Control/VBoxContainer/About" to="." method="_on_about_pressed"]
+[connection signal="focus_entered" from="MainMenuUI/Control/VBoxContainer/Exit" to="." method="PlayClick"]
+[connection signal="pressed" from="MainMenuUI/Control/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

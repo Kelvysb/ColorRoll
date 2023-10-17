@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://bl5cmauyfpdau"]
+
+[ext_resource type="Script" path="res://Scripts/Pause.gd" id="1_q87ve"]
+[ext_resource type="Theme" uid="uid://fex84b4n5131" path="res://Assets/GUI/MenuTheme.tres" id="2_8vw84"]
+[ext_resource type="PackedScene" uid="uid://3i3h71ansqtx" path="res://UI/ControlsUi.tscn" id="2_mq7pc"]
+[ext_resource type="Theme" uid="uid://bvdamx30qin7c" path="res://Assets/GUI/TitleTheme.tres" id="4_vxyah"]
+[ext_resource type="AudioStream" uid="uid://dlxj5n2e3if3g" path="res://Assets/Audio/click1.ogg" id="5_rgw5d"]
+
+[node name="Pause" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_q87ve")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32549, 0.32549, 0.32549, 0.745098)
+
+[node name="Controls" parent="Control" instance=ExtResource("2_mq7pc")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -224.0
+offset_top = -144.0
+offset_right = -12.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Continue" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../Quit")
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Quit")
+theme = ExtResource("2_8vw84")
+text = "Continue"
+
+[node name="Quit" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Continue")
+focus_neighbor_bottom = NodePath("../Continue")
+focus_next = NodePath("../Continue")
+focus_previous = NodePath("../Continue")
+theme = ExtResource("2_8vw84")
+text = "Quit"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.5
+offset_top = -26.0
+offset_right = 28.5
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_vxyah")
+text = "Paused"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_rgw5d")
+
+[connection signal="focus_entered" from="Control/VBoxContainer/Continue" to="." method="PlayClick"]
+[connection signal="pressed" from="Control/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="focus_entered" from="Control/VBoxContainer/Quit" to="." method="PlayClick"]
+[connection signal="pressed" from="Control/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

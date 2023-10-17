@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cidtbfvrk4s22"]
+[gd_scene load_steps=10 format=3 uid="uid://cidtbfvrk4s22"]
 
 [ext_resource type="Script" path="res://Scripts/DiscBreakExplosion.gd" id="1_uh2g0"]
+[ext_resource type="AudioStream" uid="uid://ucs2jibpoydb" path="res://Assets/Audio/forceField_000.ogg" id="2_1dif0"]
 
 [sub_resource type="Gradient" id="Gradient_6ygl4"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -57,3 +58,7 @@ visibility_aabb = AABB(-70.5103, -50.5479, -71.7701, 141.021, 106.406, 143.54)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_0q5il")
 draw_pass_1 = SubResource("SphereMesh_gpjk3")
+
+[node name="DiscBreakSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1dif0")
+volume_db = -10.0

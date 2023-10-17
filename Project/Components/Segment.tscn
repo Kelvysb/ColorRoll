@@ -14,6 +14,7 @@ script = ExtResource("1_lhxi6")
 
 [node name="Portal" parent="." instance=ExtResource("3_kqy6g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -91.9468)
+visible = false
 
 [node name="NextPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100.5)

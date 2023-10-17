@@ -1,0 +1,140 @@
+[gd_scene load_steps=11 format=3 uid="uid://djumm25fuggin"]
+
+[ext_resource type="Script" path="res://Scripts/AboutMenu.gd" id="1_iolkw"]
+[ext_resource type="PackedScene" uid="uid://cl6ie12skhyyy" path="res://Components/SegmentController.tscn" id="2_idbmy"]
+[ext_resource type="Texture2D" uid="uid://cgvl4oj1ff8ff" path="res://Assets/GUI/icon.svg" id="3_g23t0"]
+[ext_resource type="Theme" uid="uid://bvdamx30qin7c" path="res://Assets/GUI/TitleTheme.tres" id="4_cu21m"]
+[ext_resource type="Theme" uid="uid://fex84b4n5131" path="res://Assets/GUI/MenuTheme.tres" id="5_kr7fu"]
+[ext_resource type="AudioStream" uid="uid://3euroo31y02t" path="res://Assets/Audio/music.mp3" id="6_3ye4l"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7i32q"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_f386n"]
+sky_material = SubResource("ProceduralSkyMaterial_7i32q")
+
+[sub_resource type="Environment" id="Environment_kbtou"]
+background_mode = 2
+sky = SubResource("Sky_f386n")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_anisotropy = -0.62
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3poxq"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 1.51
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_iolkw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kbtou")
+camera_attributes = SubResource("CameraAttributesPractical_3poxq")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27.1191)
+
+[node name="SegmentController" parent="." instance=ExtResource("2_idbmy")]
+
+[node name="MainMenuUI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="MainMenuUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MainMenuUI/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0784314, 0.0784314, 0.0784314, 0.117647)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenuUI/Control"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 34.0
+offset_right = 705.0
+offset_bottom = 165.0
+
+[node name="TextureRect" type="TextureRect" parent="MainMenuUI/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_g23t0")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Title" type="Label" parent="MainMenuUI/Control/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_cu21m")
+theme_override_font_sizes/font_size = 61
+text = "Color Roll"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuUI/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -262.0
+offset_top = -87.0
+offset_right = -38.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Back" type="Button" parent="MainMenuUI/Control/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_kr7fu")
+text = "Exit"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MainMenuUI/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -531.0
+offset_top = -158.0
+offset_right = 299.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "Sobre o Color Roll e o Open Dials GamePad:
+
+Este jogo é uma demonstração de código aberto e funciona como uma prova de conceito para o Open Dials GamePad.
+
+Open dials é um gamepad de código aberto com 2 dials, idealizado para ser fácil e barato de construir, e para servir de impulso para tentar encontrar novas formas de controlar um jogo.
+
+Mais sobre OpenDials, confira a página [url=\"https://ciancistudio.itch.io/\"]CiaNCI Studio Itch.io[/url] e [url=\"https://github.com/Kelvysb/OpenDials\" ]Página Github do OpenDials[/url] .
+
+-- English --
+
+About Color Roll and Open Dials GamePad:
+
+This game it's an open source demo, and works as a proof of concept for the Open Dials GamePad.
+
+Open dials it's and open source gamepad with 2 dials, idealized to be easy and cheap to build, and to  serve as an impulse to try to find new ways to control a game.
+
+More about OpenDials, check out the [url=\"https://ciancistudio.itch.io/\"]CiaNCI Studio Itch.io[/url] page and [url=\"https://github.com/Kelvysb/OpenDials\"]OpenDials Github Page[/url] .
+"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_3ye4l")
+volume_db = -35.0
+pitch_scale = 0.75
+autoplay = true
+
+[connection signal="pressed" from="MainMenuUI/Control/VBoxContainer/Back" to="." method="_on_back_pressed"]

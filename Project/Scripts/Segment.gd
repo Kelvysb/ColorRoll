@@ -13,6 +13,9 @@ func _ready():
 	portalColor = GetRandColor()
 	portal.SetColor(portalColor)
 
+func _physics_process(delta):
+	portal.visible = HasPortal	
+
 func GetRandColor() -> Color:
 	var chance = randi_range(1, 100)
 	if chance > 40:

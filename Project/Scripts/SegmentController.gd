@@ -11,7 +11,7 @@ var segments : Array[Segment] = []
 
 func _process(delta):
 	if segments.size() == 0:
-		InitializeSegments()	
+		InitializeSegments()		
 	
 func InitializeSegments():
 	for i in range(SegmentCount):
